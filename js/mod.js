@@ -1,7 +1,7 @@
 let modInfo = {
-	name: "The ??? Tree",
-	id: "mymod",
-	author: "nobody",
+	name: "Plus 1 Tree",
+	id: "P1T",
+	author: "RTXT25",
 	pointsName: "points",
 	modFiles: ["layers.js", "tree.js"],
 
@@ -34,15 +34,22 @@ function getStartPoints(){
 
 // Determines if it should show points/sec
 function canGenPoints(){
-	return true
+	return (hasUpgrade("+",11))
 }
 
 // Calculate points/sec!
 function getPointGen() {
 	if(!canGenPoints())
 		return new Decimal(0)
-
 	let gain = new Decimal(1)
+
+	if (hasUpgrade("+",12)) gain = gain.add(1)
+	if (hasUpgrade("+",13)) gain = gain.add(1)
+	if (hasUpgrade("+",14)) gain = gain.add(1)
+	if (hasUpgrade("+",15)) gain = gain.add(1)
+
+	gain = gain.add(getBuyableAmount('+', 11))
+
 	return gain
 }
 
