@@ -1,4 +1,4 @@
-addLayer("+", {
+addLayer("a", {
     name: "Addition", // This is optional, only used in a few places, If absent it just uses the layer id.
     symbol: "+", // This appears on the layer's node. Default is the id with the first letter capitalized
     position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
@@ -33,39 +33,98 @@ addLayer("+", {
         12 :{
             title : "+1",
             description : "+1 to point generation",
-            cost: new Decimal(1)
+            cost: new Decimal(1),
+            unlocked() { return hasUpgrade('a',11)},
         },
         13 :{
             title : "+1 again",
-            description : "+1 to point generation again",
-            cost: new Decimal(2)
+            description : "+1 to point generation",
+            cost: new Decimal(2),
+            unlocked() { return hasUpgrade('a',12)},
         },
         14 :{
             title : "+1 again again",
-            description : "+1 to point generation again again",
-            cost: new Decimal(2)
+            description : "+1 to point generation",
+            cost: new Decimal(2),
+            unlocked() { return hasUpgrade('a',13)},
         },
         15 :{
             title : "+1 again again again",
-            description : "+1 to point generation again again again",
-            cost: new Decimal(3)
+            description : "+1 to point generation",
+            cost: new Decimal(4),
+            unlocked() { return hasUpgrade('a',14)},
         },
         21 :{
             title : "+1 buyable",
             description : "Unlock the +1 Buyable",
-            cost: new Decimal(3)
+            cost: new Decimal(5),
+            unlocked() { return hasUpgrade('a',15)},
+        },
+        22 :{
+            title : "+2",
+            description : "+2 to point generation",
+            cost: new Decimal(10),
+            unlocked() { return hasUpgrade('a',21)},
+        },
+        23 :{
+            title : "+2 again",
+            description : "+2 to point generation",
+            cost: new Decimal(10),
+            unlocked() { return hasUpgrade('a',22)},
+        },
+        24 :{
+            title : "+2 again again",
+            description : "+2 to point generation",
+            cost: new Decimal(10),
+            unlocked() { return hasUpgrade('a',23)},
+        },
+        25 :{
+            title : "+2 again again again",
+            description : "+2 to point generation",
+            cost: new Decimal(10),
+            unlocked() { return hasUpgrade('a',24)},
         },
     },
     buyables : {
         11: {
-            cost(x) { return new Decimal(1).mul(x) },
-            display() { return "<h1>+1 buyable</h1>" },
+            title: "+1 Buyable",
+            cost(x) { return new Decimal(10).pow(x.pow(1.1)) },
+            display() {
+                return "Amount: "+formatWhole(getBuyableAmount('a', 11))+"<br> cost:"+format(tmp.a.buyables[11].cost)+ " Points"
+            },
             canAfford() { return player[this.layer].points.gte(this.cost()) },
             buy() {
                 player[this.layer].points = player[this.layer].points.sub(this.cost())
                 setBuyableAmount(this.layer, this.id, getBuyableAmount(this.layer, this.id).add(1))
             },
+            unlocked() { return hasUpgrade('a',21)},
         },
     },
+    tabFormat: {
+        "Upgrades": {
+            content: [
+                "main-display",
+                "prestige-button",
+                "blank",
+                ["display-text",
+                    function() { return 'You have ' + format(player.points) + ' points' },],
+                "blank",
+                "upgrades",
+            ],
+        },
+        "Buyables": {
+            content: [
+                "main-display",
+                "prestige-button",
+                "blank",
+                ["display-text",
+                    function() { return 'You have ' + format(player.points) + ' points' },],
+                "blank",
+                "buyables",
+            ],
+            unlocked() { return hasUpgrade('a',21)},
+        },
+    },
+    
     layerShown(){return true}
 })

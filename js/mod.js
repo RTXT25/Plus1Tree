@@ -3,7 +3,7 @@ let modInfo = {
 	id: "P1T",
 	author: "RTXT25",
 	pointsName: "points",
-	modFiles: ["layers.js", "tree.js"],
+	modFiles: ["layers.js", "tree.js","notifications.js"],
 
 	discordName: "",
 	discordLink: "",
@@ -34,7 +34,7 @@ function getStartPoints(){
 
 // Determines if it should show points/sec
 function canGenPoints(){
-	return (hasUpgrade("+",11))
+	return (hasUpgrade("a",11))
 }
 
 // Calculate points/sec!
@@ -43,12 +43,13 @@ function getPointGen() {
 		return new Decimal(0)
 	let gain = new Decimal(1)
 
-	if (hasUpgrade("+",12)) gain = gain.add(1)
-	if (hasUpgrade("+",13)) gain = gain.add(1)
-	if (hasUpgrade("+",14)) gain = gain.add(1)
-	if (hasUpgrade("+",15)) gain = gain.add(1)
+	if (hasUpgrade("a",12)) gain = gain.add(1)
+	if (hasUpgrade("a",13)) gain = gain.add(1)
+	if (hasUpgrade("a",14)) gain = gain.add(1)
+	if (hasUpgrade("a",15)) gain = gain.add(1)
+	if (hasUpgrade("a",22)) gain = gain.add(2)
 
-	gain = gain.add(getBuyableAmount('+', 11))
+	gain = gain.add(getBuyableAmount('a', 11))
 
 	return gain
 }
