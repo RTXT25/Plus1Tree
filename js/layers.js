@@ -133,11 +133,12 @@ addLayer("e", {
         unlocked: true,                     // You can add more variables here to add them to your layer.
         points: new Decimal(0),             // "points" is the internal name for the main resource of the layer.
     }},
-    name: "equal",
+    name: "equality",
     symbol: "=",
-    color: "#4BDC13",                       // The color for this layer, which affects many elements.
+    color: "#e8c500",                       // The color for this layer, which affects many elements.
     resource: "=",            // The name of this layer's main prestige resource.
-    row: 0,                                 // The row this layer is on (0 is the first row).
+    row: 0,           // The row this layer is on (0 is the first row).
+    position:69,
 
     baseResource: "+",                 // The name of the resource your prestige gain is based on.
     baseAmount() { return player.points },  // A function to return the current amount of baseResource.
