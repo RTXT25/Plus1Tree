@@ -13,11 +13,13 @@ let modInfo = {
 
 // Set your version in num and name
 let VERSION = {
-	num: "0.2",
+	num: "0.2.1",
 	name: "equality",
 }
 
 let changelog = `<h1>Changelog:</h1><br>
+        <h3>v0.2.1 Equality</h3><br>
+	        - Fixed = colo(u)r and position (it still does nothing)<br>
 
         <h3>v0.2 Equality</h3><br>
 	        - Added = layer (it does nothing)<br>
