@@ -82,7 +82,7 @@ function getPointGen() {
 
 	gain = gain.add(m11)
 
-	if (hasMilestone("e",0)) gain = gain.times(player.e.points)
+	if (hasMilestone("e",0)) gain = gain.times(player.e.points).add(1)
 
 	return gain
 }
